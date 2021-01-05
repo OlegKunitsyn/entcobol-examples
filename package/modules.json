@@ -1,0 +1,24 @@
+{
+  "name": "demo-banking-FIXME",
+  "description": "Demo banking package",
+  "modules": [
+    "src/banking.cbl"
+  ],
+  "dialect": "entcobol",
+  "licenses": [
+    "MIT"
+  ],
+  "authors": [
+    "FIXME"
+  ],
+  "dependencies": {},
+  "dependencies-debug": {
+    "ecblunit": "*"
+  },
+  "scripts": {
+    "build": "cobolget update && cobolget install",
+    "upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl Z82698.CBL",
+    "upload:tests": "zowe zos-files upload file-to-data-set tests/tests.cbl Z82698.CBL",
+    "tests": "zowe jobs submit local-file tests/tests.jcl --view-all-spool-content"
+  }
+}
