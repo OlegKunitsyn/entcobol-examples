@@ -1,0 +1,24 @@
+name: nodejs-ci
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm i -g @zowe/cli --ignore-scripts
+    - run: zowe profiles create zosmf ztrial --host ${{ secrets.HOST }} --port ${{ secrets.PORT }} --user ${{ secrets.USER }} --pass ${{ secrets.PASS }} --reject-unauthorized false
+    - run: npm i -g cobolget
+    - run: cobolget update
+    - run: cobolget install
+    - run: zowe zos-files upload file-to-data-set src/sales.cpy ${{ secrets.USER }}.CPY
+    - run: zowe zos-files upload file-to-data-set modules/modules.cbl ${{ secrets.USER }}.CBL
+    - run: zowe zos-files upload file-to-data-set tests/tests.cbl ${{ secrets.USER }}.CBL
+    - run: exit `zowe jobs submit local-file tests/tests.jcl --wait-for-output --rff retcode --rft string | cut -d" " -f 2`

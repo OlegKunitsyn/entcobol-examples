@@ -1,0 +1,32 @@
+{
+  "$schema": "https://cobolget.com/schema.json",
+  "name": "sales",
+  "description": "Summarize sales in a specific region provided in CSV format",
+  "modules": [
+    "src/parser.cbl",
+    "src/reader.cbl",
+    "src/sales.cbl"
+  ],
+  "dialect": "entcobol",
+  "licenses": [
+    "MIT"
+  ],
+  "authors": [
+    "Olegs Kunicins"
+  ],
+  "dependencies": {},
+  "dependencies-debug": {
+    "ecblunit": "*"
+  },
+  "scripts": {
+    "build": "cobolget update && cobolget install",
+    "program:upload:resource": "zowe zos-files upload file-to-data-set resources/sales.csv Z82698.RES",
+    "program:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy Z82698.CPY",
+    "program:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl Z82698.CBL",
+    "program:exec": "zowe jobs submit local-file sales.jcl --view-all-spool-content",
+    "test:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy Z82698.CPY",
+    "test:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl Z82698.CBL",
+    "test:upload:tests": "zowe zos-files upload file-to-data-set tests/tests.cbl Z82698.CBL",
+    "test:exec": "zowe jobs submit local-file tests/tests.jcl --view-all-spool-content"
+  }
+}
