@@ -1,8 +1,13 @@
+       *>**
+       *>  READER
+       *>  @author Olegs Kunicins
+       *>  @license MIT
+       *>**
+
        *>*
        *> Filters CSV rows by `where` and aggregates TotalRevenue
-       *>*
-       *> @param where Region or Country filter
-       *> @return Aggregated TotalRevenue
+       *> @param where Region or Country filter, X(48)
+       *> @return Aggregated `TotalRevenue`, 9(9)V99
        *>*
        IDENTIFICATION DIVISION.
        PROGRAM-ID. READER.

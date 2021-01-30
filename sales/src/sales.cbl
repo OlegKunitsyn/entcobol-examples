@@ -1,3 +1,9 @@
+       *>**
+       *>  SALES
+       *>  @author Olegs Kunicins
+       *>  @license MIT
+       *>**
+
        *>*
        *> Entry point
        *>*

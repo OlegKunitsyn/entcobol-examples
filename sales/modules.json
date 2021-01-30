@@ -19,6 +19,7 @@
     "ecblunit": "*"
   },
   "scripts": {
+    "doc": "coboldoc generate src/*.cbl -o coboldoc",
     "build": "cobolget update && cobolget install",
     "program:upload:resource": "zowe zos-files upload file-to-data-set resources/sales.csv Z82698.RES",
     "program:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy Z82698.CPY",

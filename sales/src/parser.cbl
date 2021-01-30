@@ -1,8 +1,14 @@
+       *>**
+       *>  PARSER
+       *>  @author Olegs Kunicins
+       *>  @license MIT
+       *>**
+       
        *>*
-       *> Parses CSV row into SALES.CPY
-       *>*
-       *> @param row Comma-separated CSV row
-       *> @return SALES record
+       *> Parses CSV row into SALES copybook
+       *>
+       *> @param row Comma-separated CSV string, X(80)
+       *> @return SALES copybook
        *>*
        IDENTIFICATION DIVISION.
        PROGRAM-ID. PARSER.
