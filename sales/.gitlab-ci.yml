@@ -1,0 +1,14 @@
+image: node:latest
+
+build:
+  stage: build
+  script:
+    - npm i -g @zowe/cli --ignore-scripts
+    - zowe profiles create zosmf ztrial --host ${HOST} --port ${PORT} --user ${USER} --pass ${PASS} --reject-unauthorized false
+    - npm i -g cobolget
+    - cobolget update
+    - cobolget install
+    - zowe zos-files upload file-to-data-set src/sales.cpy ${USER}.CPY
+    - zowe zos-files upload file-to-data-set modules/modules.cbl ${USER}.CBL
+    - zowe zos-files upload file-to-data-set tests/tests.cbl ${USER}.CBL
+    - exit `zowe jobs submit local-file tests/tests.jcl --wait-for-output --rff retcode --rft string | cut -d" " -f 2`
