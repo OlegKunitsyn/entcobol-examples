@@ -1,4 +1,4 @@
-## Project example - sales
+## Project example - Sales
 Summarize sales in a specific region provided in CSV format
 
 ### Demonstrates
@@ -9,3 +9,4 @@ Summarize sales in a specific region provided in CSV format
 - Unit mocking
 - Automation scenarios
 - Continuous Integration workflow
+- Auto-documentation
