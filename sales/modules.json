@@ -21,13 +21,17 @@
   "scripts": {
     "doc": "coboldoc generate src/*.cbl -o coboldoc",
     "build": "cobolget update && cobolget install",
-    "program:upload:resource": "zowe zos-files upload file-to-data-set resources/sales.csv Z82698.RES",
-    "program:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy Z82698.CPY",
-    "program:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl Z82698.CBL",
+    "program:upload:resource": "zowe zos-files upload file-to-data-set resources/sales.csv <USER ID>.RES",
+    "program:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy <USER ID>.CPY",
+    "program:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl <USER ID>.CBL",
     "program:exec": "zowe jobs submit local-file sales.jcl --view-all-spool-content",
-    "test:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy Z82698.CPY",
-    "test:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl Z82698.CBL",
-    "test:upload:tests": "zowe zos-files upload file-to-data-set tests/tests.cbl Z82698.CBL",
-    "test:exec": "zowe jobs submit local-file tests/tests.jcl --view-all-spool-content"
+    "test:upload:copybook": "zowe zos-files upload file-to-data-set src/sales.cpy <USER ID>.CPY",
+    "test:upload:modules": "zowe zos-files upload file-to-data-set modules/modules.cbl <USER ID>.CBL",
+    "test:upload:tests": "zowe zos-files upload file-to-data-set tests/tests.cbl <USER ID>.CBL",
+    "test:exec": "zowe jobs submit local-file tests/tests.jcl --view-all-spool-content",
+    "setup:RES": "zowe zos-files create data-set-classic <USER ID>.RES --bs 32720 --dst LIBRARY --rl 80 --rf FB --sz 5TRK --vs VPWRKC",
+    "setup:CPY": "zowe zos-files create data-set-classic <USER ID>.CPY --bs 32720 --dst LIBRARY --rl 80 --rf FB --sz 30CYL --vs VPWRKB",
+    "setup:CBL": "zowe zos-files create data-set-classic <USER ID>.CBL --bs 32720 --dst LIBRARY --rl 80 --rf FB --sz 30CYL --vs VPWRKA",
+    "setup:LOAD": "zowe zos-files create data-set-classic <USER ID>.LOAD --bs 4096 --dst LIBRARY --rl 80 --rf U --sz 450CYL --vs VPWRKE"
   }
 }
